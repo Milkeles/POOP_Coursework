@@ -139,7 +139,7 @@ BOOL CPOOPCourseworkDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 void CPOOPCourseworkDoc::OnFileOpen()
 {
-	CDocument::OnOpenDocument();
+	CDocument::OnOpenDocument(NULL);
 }
 #ifdef SHARED_HANDLERS
 
