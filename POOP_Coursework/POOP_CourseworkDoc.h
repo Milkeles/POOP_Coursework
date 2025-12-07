@@ -12,7 +12,8 @@ class CPOOPCourseworkDoc : public CDocument
 protected: // create from serialization only
 	CPOOPCourseworkDoc() noexcept;
 	DECLARE_DYNCREATE(CPOOPCourseworkDoc)
-
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName) override;
+	void OnFileOpen();
 // Attributes
 public:
 	std::vector<CShape*> shapes;

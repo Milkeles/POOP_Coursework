@@ -23,6 +23,7 @@
 IMPLEMENT_DYNCREATE(CPOOPCourseworkDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CPOOPCourseworkDoc, CDocument)
+	ON_COMMAND(ID_FILE_OPEN, &CPOOPCourseworkDoc::OnFileOpen)
 END_MESSAGE_MAP()
 
 
@@ -108,6 +109,7 @@ void CPOOPCourseworkDoc::Serialize(CArchive& ar)
 	}
 	else
 	{
+		DeleteContents();
 		ar >> count;
 		shapes.reserve(count);
 		for (UINT i = 0; i < count; ++i)
@@ -126,8 +128,19 @@ void CPOOPCourseworkDoc::Serialize(CArchive& ar)
 			grid.Add(shapes.back());
 		}
 	}
+	SetModifiedFlag(FALSE);
+	UpdateAllViews(NULL);
 }
 
+BOOL CPOOPCourseworkDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	return CDocument::OnOpenDocument(lpszPathName);
+}
+
+void CPOOPCourseworkDoc::OnFileOpen()
+{
+	CDocument::OnOpenDocument();
+}
 #ifdef SHARED_HANDLERS
 
 // Support for thumbnails
@@ -181,6 +194,7 @@ void CPOOPCourseworkDoc::SetSearchContent(const CString& value)
 }
 
 #endif // SHARED_HANDLERS
+
 
 // CPOOPCourseworkDoc diagnostics
 
